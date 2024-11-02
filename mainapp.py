@@ -20,6 +20,7 @@ bot = commands.Bot(command_prefix=".", intents=intents)
 async def on_ready():
    print(f'Bot connected as {bot.user}')
 
+#Joins the target voice channel when someone enters that channel
 @bot.event
 async def on_voice_state_update(member, before, after):
    if before.channel is None and after.channel is not None:
@@ -31,5 +32,8 @@ async def on_voice_state_update(member, before, after):
       if after.channel.id == TARGET_CHANNEL:
          if bot.voice_clients == []:
             await after.channel.connect()
+
+#Leaves the target voice channel when there's no one left
+
 
 bot.run(TOKEN)   
